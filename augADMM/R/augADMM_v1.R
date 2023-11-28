@@ -1,24 +1,22 @@
-#' Augmented ADMM for Generalized LASSO
-#'
-#' Solves the generalized LASSO problem via the augmented ADMM approach.
-#'
-#' @param A An (m x n) regressor matrix.
-#' @param b A length-m response vector.
-#' @param D Regularization matrix of n columns (default is identity matrix).
+#' @title Augmented ADMM for Generalized LASSO
+#' @description Solves generalized LASSO problems using augmented ADMM.
+#' @param A Regressor matrix.
+#' @param b Response vector.
+#' @param D Regularization matrix.
 #' @param lambda Regularization parameter.
 #' @param rho Augmented Lagrangian parameter.
-#' @param alpha Overrelaxation parameter in [1,2].
-#' @param abstol Absolute tolerance stopping criterion.
-#' @param reltol Relative tolerance stopping criterion.
+#' @param alpha Overrelaxation parameter.
+#' @param abstol Absolute tolerance for convergence.
+#' @param reltol Relative tolerance for convergence.
 #' @param maxiter Maximum number of iterations.
-#'
-#' @return A named list containing the solution vector and iteration history.
-#'
-#' @examples
-#' # Example code to demonstrate usage
-#'
+#' @return A list containing the solution and iteration history.
 #' @export
-augADMM.genlasso <- function(A, b, D = diag(length(b)), lambda = 1.0, rho = 1.0, alpha = 1.0, 
-                             abstol = 1e-4, reltol = 1e-2, maxiter = 1000) {
-  # Function implementation
+augADMM_genlasso <- function(A, b, D, lambda, rho, alpha, abstol, reltol, maxiter) {
+  # Call the C++ function
+  result <- augADMM_genlasso(as.matrix(A), as.vector(b), as.matrix(D), lambda, rho, alpha, abstol, reltol, maxiter)
+  
+  # Process and return the result
+  return(result)
 }
+
+

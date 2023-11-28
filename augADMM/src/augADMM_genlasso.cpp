@@ -1,50 +1,42 @@
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
+// [[Rcpp::depends(RcppArmadillo)]]
+
 using namespace Rcpp;
-
-// Function to update x (this is problem-specific and might need further details)
-NumericVector update_x(const NumericMatrix& A, const NumericVector& b, 
-                       const NumericVector& z, const NumericVector& u, 
-                       double rho) {
-    // Implement the update rule for x
-    // ...
-    return NumericVector(); // Placeholder return
-}
-
-// Function for soft thresholding (for updating z)
-NumericVector soft_threshold(const NumericVector& x, double kappa) {
-    NumericVector result = clone(x);
-    for (int i = 0; i < x.size(); i++) {
-        result[i] = std::max(0.0, x[i] - kappa) - std::max(0.0, -x[i] - kappa);
-    }
-    return result;
-}
+using namespace arma;
 
 // [[Rcpp::export]]
-List augADMM_genlasso(NumericMatrix A, NumericVector b, NumericMatrix D, 
-                      double lambda, double rho, double alpha, 
-                      double abstol, double reltol, int maxiter) {
-    int n = A.ncol();
+List augADMM_genlasso(NumericMatrix A_mat, NumericVector b_vec,
+                      NumericMatrix D_mat, double lambda, double rho,
+                      double alpha, double abstol, double reltol, int maxiter) {
 
-    // Initialize variables
-    NumericVector x(n), z(n), u(n); // Modify these as needed for your algorithm
+  // Convert NumericMatrix and NumericVector to arma::mat and arma::vec
+  mat A = as<mat>(A_mat);
+  vec b = as<vec>(b_vec);
+  mat D = as<mat>(D_mat);
 
-    for (int iter = 0; iter < maxiter; iter++) {
-        // Update x
-        x = update_x(A, b, z, u, rho);
+  int m1 = D.n_rows;
+  int m2 = D.n_cols;
 
-        // Update z
-        NumericVector Dx = D * x; // This assumes D is a diagonal matrix or similar
-        z = soft_threshold(Dx + u, lambda / rho);
+  int p = A.n_cols;
+  
+  // Initialize variables: theta, alpha1, alpha2, etc.
+  vec theta = zeros<vec>(p);
+  vec alpha1 = zeros<vec>(m1); // Assuming m1 is defined
+  vec alpha2 = zeros<vec>(m2); // Assuming m2 is defined
+  vec bar_alpha1, bar_alpha2;
 
-        // Update u
-        u = u + Dx - z;
+  // Main ADMM iteration loop
+  for (int k = 0; k < maxiter; ++k) {
+    // Update theta
+    // Update alpha1 and alpha2
+    // Compute bar_alpha1 and bar_alpha2
+    // Convergence checks
+  }
 
-        // Check for convergence
-        // Add convergence check here
-    }
+  // Prepare the result
+  List result;
+  result["theta"] = theta;
+  // Include other results like iteration history
 
-    // Calculate the objective value or any other metrics if needed
-    double obj_val = 0; // Replace with actual calculation
-
-    return List::create(_["x"] = x, _["obj_val"] = obj_val);
+  return result;
 }
