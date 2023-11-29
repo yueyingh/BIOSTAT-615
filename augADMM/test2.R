@@ -36,8 +36,8 @@ D <- diag(p)
 
 # Parameters for augADMM_genlasso
 lambda <- 0.1 # Example value for lambda
-rho <- 1.0    # Example value for rho
-alpha <- 1.5  # Example value for alpha (should be in [1,2])
+rho <- 1.0 # Example value for rho
+alpha <- 1.5 # Example value for alpha (should be in [1,2])
 abstol <- 1e-4 # Example value for absolute tolerance
 reltol <- 1e-2 # Example value for relative tolerance
 maxiter <- 1000 # Maximum number of iterations
@@ -47,5 +47,3 @@ result <- augADMM_genlasso(X, y, D, lambda, rho, alpha, abstol, reltol, maxiter)
 
 # Check the results
 print(result)
-
-
