@@ -12,8 +12,26 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // admm_genlasso
-Rcpp::List admm_genlasso(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& M, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
+Rcpp::List admm_genlasso(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
 RcppExport SEXP _augmentedADMM_admm_genlasso(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP lambdaSEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type D(DSEXP);
+    Rcpp::traits::input_parameter< const double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
+    Rcpp::traits::input_parameter< const double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< const double >::type rho(rhoSEXP);
+    rcpp_result_gen = Rcpp::wrap(admm_genlasso(A, b, D, lambda, reltol, abstol, maxiter, rho));
+    return rcpp_result_gen;
+END_RCPP
+}
+// admm_genlasso_with_M
+Rcpp::List admm_genlasso_with_M(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& M, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
+RcppExport SEXP _augmentedADMM_admm_genlasso_with_M(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP MSEXP, SEXP lambdaSEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -26,13 +44,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type abstol(abstolSEXP);
     Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< const double >::type rho(rhoSEXP);
-    rcpp_result_gen = Rcpp::wrap(admm_genlasso(A, b, D, M, lambda, reltol, abstol, maxiter, rho));
+    rcpp_result_gen = Rcpp::wrap(admm_genlasso_with_M(A, b, D, M, lambda, reltol, abstol, maxiter, rho));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_augmentedADMM_admm_genlasso", (DL_FUNC) &_augmentedADMM_admm_genlasso, 8},
+    {"_augmentedADMM_admm_genlasso_with_M", (DL_FUNC) &_augmentedADMM_admm_genlasso_with_M, 9},
     {NULL, NULL, 0}
 };
 
