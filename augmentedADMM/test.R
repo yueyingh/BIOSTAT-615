@@ -1,7 +1,12 @@
+# Load necessary libraries
+library(microbenchmark)
+library(augmentedADMM)
+
 # Load the function
 source("gen_data.R")
 
 set.seed(123)
+
 # Generate data
 data_params <- list(
     num.groups = 5, num.vars.per.group = 10, n = 100,
@@ -15,26 +20,59 @@ X <- data$X
 Y <- data$Y
 D <- diag(ncol(X))
 
-lambda <- 0.1 # Example, adjust as needed
-rho <- 1.0 # Example, adjust as needed
-alpha <- 1.5 # Over-relaxation parameter, adjust as needed
-abstol <- 1e-4 # Absolute tolerance for convergence
-reltol <- 1e-2 # Relative tolerance for convergence
-maxiter <- as.integer(1000) # Maximum number of iterations
+lambda <- 0.1
+rho <- 1.0
+alpha <- 1.5
+abstol <- 1e-4
+reltol <- 1e-2
+maxiter <- 1000
 
-
-xinit <- rep(0, ncol(X)) # Initial solution vector
-
-# Load your package
-library(augmentedADMM)
+# Define M matrix (adjust as necessary)
+M <- diag(ncol(X))
 
 # result <- .Call('_augmentedADMM_admm_genlasso', X, Y, D, lambda, reltol, abstol, maxiter, rho)
 
 # Call the function from your package
 result <- genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
-result <- genlasso_admm_with_M()(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
+result <- genlasso_admm_with_M(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
 
-# View the results
-print(result)
+# Benchmark the two functions
+benchmark_res <- microbenchmark(
+    genlasso_admm = {
+        result_admm <- genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
+    },
+    genlasso_admm_with_M = {
+        result_admm_M <- genlasso_admm_with_M(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+    },
+    times = 10
+)
 
+print(benchmark_res)
 
+# Function to plot convergence with adjusted title position
+plot_convergence <- function(history, title) {
+    opar <- par(no.readonly = TRUE)
+
+    # Adjust margins
+    par(mfrow = c(1, 3), oma = c(0, 0, 2, 0), mar = c(5, 4, 2, 2) + 0.1)
+
+    # Create plots without the main title
+    plot(history$objval, type = "b", xlab = "Index", ylab = "History[objval]")
+    mtext(paste("Cost Function -", title))
+
+    plot(history$r_norm, type = "b", xlab = "Index", ylab = "History[r_norm]")
+    mtext(paste("Primal Residual -", title))
+
+    plot(history$s_norm, type = "b", xlab = "Index", ylab = "History[s_norm]")
+    mtext(paste("Dual Residual -", title))
+
+    par(opar)
+}
+
+pdf("convergence_plots.pdf", width = 10, height = 4)
+
+# Apply the function to each result
+plot_convergence(result_admm$history, "genlasso_admm")
+plot_convergence(result_admm_M$history, "genlasso_admm_with_M")
+
+dev.off()
