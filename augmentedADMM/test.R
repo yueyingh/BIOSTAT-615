@@ -1,6 +1,7 @@
 # Load necessary libraries
 library(microbenchmark)
 library(augmentedADMM)
+library(ggplot2)
 
 # Load the function
 source("gen_data.R")
@@ -48,7 +49,6 @@ benchmark_res <- microbenchmark(
 )
 
 print(benchmark_res)
-
 # Function to plot convergence with adjusted title position
 plot_convergence <- function(history, title) {
     opar <- par(no.readonly = TRUE)
@@ -76,3 +76,4 @@ plot_convergence(result_admm$history, "genlasso_admm")
 plot_convergence(result_admm_M$history, "genlasso_admm_with_M")
 
 dev.off()
+
