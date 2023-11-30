@@ -28,10 +28,10 @@ double genlasso_objective(const arma::mat &A, const arma::colvec &b,
   return (pow(norm(A * x - b, 2), 2) / 2 + lambda * norm(D * x, 1));
 }
 
-arma::mat genlasso_factor(const arma::mat &A, double rho, const arma::mat &D) {
+arma::mat genlasso_factor(const arma::mat &A, double rho, const arma::mat &M) {
   // const int m = A.n_rows;
   // const int n = A.n_cols;
   arma::mat U;
-  U = chol(A.t() * A + rho * D.t() * D);
+  U = chol(A.t() * A + rho * M);
   return (U);
 }
