@@ -73,7 +73,7 @@ NULL
 #'
 #' @author Xiaozhi Zhu
 #' @export
-lasso_admm <- function(A, b, D = diag(length(b)), lambda = 1.0, rho = 1.0, alpha = 1.0,
+lasso_admm <- function(A, b, D = diag(length(b)), M, lambda = 1.0, rho = 1.0, alpha = 1.0,
                        abstol = 1e-4, reltol = 1e-2, maxiter = 1000) {
     #-----------------------------------------------------------
     ## PREPROCESSING
@@ -85,6 +85,9 @@ lasso_admm <- function(A, b, D = diag(length(b)), lambda = 1.0, rho = 1.0, alpha
         stop("* ADMM.GENLASSO : input 'b' is invalid data vector")
     }
     b <- as.vector(b)
+    if (!check_data_matrix(M)) {
+        stop("* ADMM.GENLASSO : input 'M' is invalid data matrix.")
+    }
     # 2. data size
     if (nrow(A) != length(b)) {
         stop("* ADMM.GENLASSO : two inputs 'A' and 'b' have non-matching dimension.")
