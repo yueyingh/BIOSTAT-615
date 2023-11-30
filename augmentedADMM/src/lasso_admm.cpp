@@ -6,7 +6,8 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
-                         const arma::mat &D, const double lambda,
+                         const arma::mat &D, const arma::mat &M,
+                         const double lambda,
                          const double reltol, const double abstol,
                          const int maxiter, const double rho) {
   // 1. get parameters
@@ -17,6 +18,7 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
   arma::colvec x(n, fill::randn);
   x /= 10.0;
   arma::colvec z(D * x);
+  arma::colvec u_prev(D * x - z);
   arma::colvec u(D * x - z);
   arma::colvec q(n, fill::zeros);
   arma::colvec zold(z);
@@ -24,7 +26,7 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
 
   // 3. precompute static variables for x-update and factorization
   arma::mat Atb = A.t() * b;
-  arma::mat U = genlasso_factor(A, rho, D); // returns upper
+  arma::mat U = genlasso_factor(A, rho, M); // returns upper
   arma::mat L = U.t();
 
   // 4. iteration
@@ -38,7 +40,7 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
   int k;
   for (k = 0; k < maxiter; k++) {
     // 4-1. update 'x'
-    q = Atb + rho * D.t() * (z - u); // temporary value
+    q = Atb-D.t()*(2*u-u_prev)+rho/2*M*x+rho/2*M.t()*x; // temporary value
     x = solve(trimatu(U), solve(trimatl(L), q));
     //        if (m >= n){
     //            x = solve(trimatu(U),solve(trimatl(L),q));
@@ -49,10 +51,11 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
 
     // 4-2. update 'z'
     zold = z;
-    z = genlasso_shrinkage(D * x + u, lambda / rho);
+    z = genlasso_shrinkage(D * x + u/rho, lambda / rho);
 
     // 4-3. update 'u'
-    u = u + D * x - z;
+    u_prev = u
+    u = u + rho * (D * x - z);
 
     // 4-3. dianostics, reporting
     h_objval(k) = genlasso_objective(A, b, D, lambda, x, z);
