@@ -1,9 +1,9 @@
 #include "ADMM_genlasso.h"
 #include "dmatrix.h" // Includes matrix utility functions
+#include "utilities.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <vector>
-#include "utilities.h" 
 
 void ADMM_GenLasso(double *x, double *z, double *y, double *A, double *b,
                    const int length, const double lambda, const double rho,
@@ -63,8 +63,8 @@ void ADMM_GenLasso(double *x, double *z, double *y, double *A, double *b,
 
 // [[Rcpp::export]]
 Rcpp::List ADMM_genlasso(Rcpp::NumericMatrix X, Rcpp::NumericVector Y,
-                            Rcpp::NumericMatrix D, double lambda, double rho,
-                            double abstol, double reltol, int maxiter) {
+                         Rcpp::NumericMatrix D, double lambda, double rho,
+                         double abstol, double reltol, int maxiter) {
 
   // Convert Rcpp types to raw pointers for ADMM_GenLasso function
   int length = X.ncol();

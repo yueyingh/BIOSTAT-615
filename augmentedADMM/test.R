@@ -15,15 +15,21 @@ D <- diag(ncol(X))
 
 lambda <- 0.1  # Example, adjust as needed
 rho <- 1.0     # Example, adjust as needed
+alpha <- 1.5   # Over-relaxation parameter, adjust as needed
 abstol <- 1e-4 # Absolute tolerance for convergence
 reltol <- 1e-2 # Relative tolerance for convergence
-maxiter <- 1000 # Maximum number of iterations
+maxiter <- as.integer(1000) # Maximum number of iterations
+
+
+xinit <- rep(0, ncol(X)) # Initial solution vector
 
 # Load your package
-library(augADMM)
+library(augmentedADMM)
+
+# result <- .Call('_augmentedADMM_admm_genlasso', X, Y, D, lambda, reltol, abstol, maxiter, rho)
 
 # Call the function from your package
-result <- ADMM_genlasso(X, Y, D, lambda, rho, abstol, reltol, maxiter)
+result <- lasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
 
 # View the results
 print(result)
