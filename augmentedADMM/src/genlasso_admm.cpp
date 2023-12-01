@@ -184,8 +184,8 @@ Rcpp::List admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
   arma::colvec z(D * x);
   arma::colvec index1 = arma::regspace(0, p - 1);
   arma::colvec index2 = arma::regspace(p, p + m - 1);
-  arma::colvec z1 = z[index1]; 
-  arma::colvec z2 = z[index2];
+  arma::colvec z1 = z.elem(index1); 
+  arma::colvec z2 = z.elem(index2);
   arma::colvec u_prev(D * x - z);
   arma::colvec u(D * x - z);
   arma::colvec q(p, fill::zeros);
@@ -207,8 +207,8 @@ Rcpp::List admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
   double sqrtn = std::sqrt(static_cast<float>(n));
   int k;
   for (k = 0; k < maxiter; k++) {
-    arma::colvec u1 = u[index1];  
-    arma::colvec u2 = u[index2];
+    arma::colvec u1 = u.elem(index1);  
+    arma::colvec u2 = u.elem(index2);
     // 4-1. update 'x'
     q = Atb - D.t() * (2 * u - u_prev) + rho / 2 * M * x +
         rho / 2 * M.t() * x; // temporary value
