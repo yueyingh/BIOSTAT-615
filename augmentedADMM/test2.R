@@ -1,3 +1,7 @@
+###
+# Testing with data generated from ADMM package
+###
+
 library(augmentedADMM)
 
 # Generate sample data
@@ -21,7 +25,7 @@ output <- genlasso_admm(A, b, D, lambda = regval) # Set D as identity matrix
 niter <- length(output$history$s_norm)
 history <- output$history
 
-pdf("convergence_plots.pdf")
+pdf("convergence_plots_test2.pdf")
 
 # Report convergence plot
 opar <- par(no.readonly = TRUE)
@@ -45,5 +49,6 @@ plot(1:niter_with_M, history_with_M$s_norm, "b", main = "Dual Residual (with M)"
 par(opar)
 
 dev.off() 
+
 
 
