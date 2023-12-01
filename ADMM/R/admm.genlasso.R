@@ -136,7 +136,3 @@ admm.genlasso <- function(A, b, D=diag(length(b)), lambda=1.0, rho=1.0, alpha=1.
                               eps_dual=result$eps_dual[1:kk])
   return(output)
 }
-
-
-
-
