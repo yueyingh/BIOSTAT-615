@@ -29,7 +29,7 @@ double genlasso_objective(const arma::mat &A, const arma::colvec &b,
 }
 
 double genlasso_objective_graph(const arma::mat &A, const arma::colvec &b,
-                                const arma::mat &D, const double lambda1,
+                                const arma::mat &C, const double lambda1,
                                 const double lambda2, const arma::colvec &x,
                                 const arma::colvec &z) {
   return (pow(norm(A * x - b, 2), 2) / 2 + lambda1 * norm(x, 1) +
