@@ -8,7 +8,7 @@ library(augmentedADMM)
 library(ggplot2)
 
 # Load the function
-source("gen_data.R")
+source("gen_data_v2.R")
 
 set.seed(123)
 
@@ -23,7 +23,9 @@ data <- do.call(gen_data, data_params)
 # Access the generated data
 X <- data$X
 Y <- data$Y
-D <- diag(ncol(X))
+D <- data$A
+C <- data$C
+M <- data$M
 
 lambda <- 0.1
 rho <- 1.0
@@ -32,27 +34,20 @@ abstol <- 1e-4
 reltol <- 1e-2
 maxiter <- 1000
 
-C <- D
 lambda1 <- 0.1
 lambda2 <- 0.1
 
-# Define M matrix (adjust as necessary)
-M <- diag(ncol(X))
-
-
 # Call the function from your package
-result <- genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
 result <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
 result <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
-
 
 # Benchmark the two functions
 benchmark_res <- microbenchmark(
     genlasso_admm = {
-        result_admm <- genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
+        result_admm_aug <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
     },
     genlasso_admm_with_M = {
-        result_admm_M <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+        result_admm_graph <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
     },
     times = 10
 )
@@ -81,7 +76,9 @@ plot_convergence <- function(history, title) {
 pdf("convergence_plots_test.pdf", width = 10, height = 4)
 
 # Apply the function to each result
-plot_convergence(result_admm$history, "genlasso_admm")
-plot_convergence(result_admm_M$history, "genlasso_admm_with_M")
+plot_convergence(result_admm_aug$history, "genlasso_admm_aug")
+plot_convergence(result_admm_graph$history, "genlasso_admm_graph")
 
 dev.off()
+
+
