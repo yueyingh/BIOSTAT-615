@@ -74,5 +74,5 @@ gen_data <- function(num.groups, num.vars.per.group, n, num.active.groups, cor, 
 
     A <- rbind(diag(p), inc_mat)
 
-    return(list(Y = Y, X = X, A = A, M = M, val = val, idx = idx, jdx = jdx, p = p, m = m, beta.true = beta.true))
+    return(list(Y = Y, X = X, A = A, C = inc_mat, M = M, val = val, idx = idx, jdx = jdx, p = p, m = m, beta.true = beta.true))
 }
