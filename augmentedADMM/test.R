@@ -38,8 +38,8 @@ lambda1 <- 0.1
 lambda2 <- 0.1
 
 # Call the function from your package
-result <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
-result <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
+result_aug <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+result_for_graph <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
 
 # Benchmark the two functions
 benchmark_res <- microbenchmark(
@@ -80,5 +80,3 @@ plot_convergence(result_admm_aug$history, "genlasso_admm_aug")
 plot_convergence(result_admm_graph$history, "genlasso_admm_graph")
 
 dev.off()
-
-

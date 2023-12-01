@@ -2,7 +2,7 @@ library(microbenchmark)
 library(ggplot2)
 library(Matrix)
 library(augmentedADMM)
-source("gen_data.R")
+source("gen_data_v2.R")
 
 # Define the range of lambda values and other parameters for the experiment
 lambda_values <- 10^seq(-4, 0, length.out = 20)
@@ -19,6 +19,9 @@ runtime_results <- list()
 data <- do.call(gen_data, data_params)
 X <- data$X
 Y <- data$Y
+D <- data$A
+M <- data$M
+C <- data$C
 
 rho <- 1.0
 abstol <- 1e-4
@@ -29,30 +32,31 @@ maxiter <- 1000
 for (nu in nu_values) {
     for (lambda in lambda_values) {
         # Generate the D matrix based on the problem setup
-        D <- sparseMatrix(i = data$idx, j = data$jdx, x = data$val)
+        # D <- sparseMatrix(i = data$idx, j = data$jdx, x = data$val)
 
-        # Run the augmented ADMM
-        genlasso_admm_res <- microbenchmark(
-            genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter),
-            times = 10 # Increase if more precision is needed
-        )
 
         # Run the standard ADMM with M matrix
         # Assuming M matrix has the same dimension as D
-        M <- sparseMatrix(i = data$idx, j = data$jdx, dims = c(nrow(D), ncol(D)))
+        # M <- sparseMatrix(i = data$idx, j = data$jdx, dims = c(nrow(D), ncol(D)))
 
 
         # Update the M matrix as required by your problem specifics
         # If the 'M' matrix needs to be different from 'D', adjust its construction accordingly
 
-        genlasso_admm_with_M_res <- microbenchmark(
-            genlasso_admm_with_M(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter),
+        genlasso_admm_aug_res <- microbenchmark(
+            genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter),
+            times = 10 # Increase if more precision is needed
+        )
+
+         # Run the augmented ADMM
+        genlasso_admm_graph_res <- microbenchmark(
+            genlasso_admm_for_graph(X, Y, D, M, C, lambda, lambda, rho, alpha, abstol, reltol, maxiter),
             times = 10 # Increase if more precision is needed
         )
 
         # Store results
-        runtime_results[[paste("genlasso_admm", "lambda", lambda, "nu", nu, sep = "_")]] <- genlasso_admm_res
-        runtime_results[[paste("genlasso_admm_with_M", "lambda", lambda, "nu", nu, sep = "_")]] <- genlasso_admm_with_M_res
+        runtime_results[[paste("genlasso_admm_aug", "lambda", lambda, "nu", nu, sep = "_")]] <- genlasso_admm_aug_res
+        runtime_results[[paste("genlasso_admm_for_graph", "lambda", lambda, "nu", nu, sep = "_")]] <- genlasso_admm_graph_res
     }
 }
 
