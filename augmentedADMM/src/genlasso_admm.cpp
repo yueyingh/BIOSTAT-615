@@ -140,13 +140,13 @@ Rcpp::List admm_genlasso_aug(const arma::mat &A, const arma::colvec &b,
     // 4-3. dianostics, reporting
     h_objval(k) = genlasso_objective(A, b, D, lambda, x, z);
     h_r_norm(k) = arma::norm(D * x - z);
-    h_s_norm(k) = arma::norm(-rho * (z - zold));
+    h_s_norm(k) = arma::norm(-rho * D.t() * (z - zold));
     if (norm(x) > norm(-z)) {
-      h_eps_pri(k) = sqrtn * abstol + reltol * norm(x);
+      h_eps_pri(k) = sqrtn * abstol + reltol * norm(D * x);
     } else {
       h_eps_pri(k) = sqrtn * abstol + reltol * norm(-z);
     }
-    h_eps_dual(k) = sqrtn * abstol + reltol * norm(rho * u);
+    h_eps_dual(k) = sqrtn * abstol + reltol * norm(D.t() * u);
 
     // 4-4. termination
     if ((h_r_norm(k) < h_eps_pri(k)) && (h_s_norm(k) < h_eps_dual(k))) {
@@ -231,13 +231,13 @@ Rcpp::List admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
     // 4-3. diagnostics, reporting
     h_objval(k) = genlasso_objective_graph(A, b, C, lambda1, lambda2, x, z);
     h_r_norm(k) = arma::norm(D * x - z);
-    h_s_norm(k) = arma::norm(-rho * (z - zold));
+    h_s_norm(k) = arma::norm(-rho * D.t() * (z - zold));
     if (norm(x) > norm(-z)) {
-      h_eps_pri(k) = sqrtn * abstol + reltol * norm(x);
+      h_eps_pri(k) = sqrtn * abstol + reltol * norm(D * x);
     } else {
       h_eps_pri(k) = sqrtn * abstol + reltol * norm(-z);
     }
-    h_eps_dual(k) = sqrtn * abstol + reltol * norm(rho * u);
+    h_eps_dual(k) = sqrtn * abstol + reltol * norm(D.t() * u);
 
     // 4-4. termination
     if ((h_r_norm(k) < h_eps_pri(k)) && (h_s_norm(k) < h_eps_dual(k))) {
