@@ -28,6 +28,14 @@ double genlasso_objective(const arma::mat &A, const arma::colvec &b,
   return (pow(norm(A * x - b, 2), 2) / 2 + lambda * norm(D * x, 1));
 }
 
+double genlasso_objective_graph(const arma::mat &A, const arma::colvec &b,
+                                const arma::mat &D, const double lambda1,
+                                const double lambda2, const arma::colvec &x,
+                                const arma::colvec &z) {
+  return (pow(norm(A * x - b, 2), 2) / 2 + lambda1 * norm(x, 1) +
+          lambda2 * norm(C * x, 1));
+}
+
 arma::mat genlasso_factor(const arma::mat &A, double rho, const arma::mat &M) {
   // const int m = A.n_rows;
   // const int n = A.n_cols;
