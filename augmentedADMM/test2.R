@@ -1,3 +1,5 @@
+library(augmentedADMM)
+
 # Generate sample data
 m <- 100
 n <- 200
@@ -29,7 +31,9 @@ plot(1:niter, history$r_norm, "b", main = "Primal Residual")
 plot(1:niter, history$s_norm, "b", main = "Dual Residual")
 par(opar)
 
-output_with_M <- genlasso_admm_with_M(A, b, D, M, lambda = regval)
+M <- diag(ncol(A))
+
+output_with_M <- genlasso_admm_aug(A, b, D, M, lambda = regval)
 niter_with_M <- length(output_with_M$history$s_norm)
 history_with_M <- output_with_M$history
 
@@ -41,3 +45,5 @@ plot(1:niter_with_M, history_with_M$s_norm, "b", main = "Dual Residual (with M)"
 par(opar)
 
 dev.off() 
+
+

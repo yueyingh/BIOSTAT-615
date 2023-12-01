@@ -5,7 +5,11 @@ admm_genlasso <- function(A, b, D, lambda, reltol, abstol, maxiter, rho) {
     .Call('_augmentedADMM_admm_genlasso', PACKAGE = 'augmentedADMM', A, b, D, lambda, reltol, abstol, maxiter, rho)
 }
 
-admm_genlasso_with_M <- function(A, b, D, M, lambda, reltol, abstol, maxiter, rho) {
-    .Call('_augmentedADMM_admm_genlasso_with_M', PACKAGE = 'augmentedADMM', A, b, D, M, lambda, reltol, abstol, maxiter, rho)
+admm_genlasso_aug <- function(A, b, D, M, lambda, reltol, abstol, maxiter, rho) {
+    .Call('_augmentedADMM_admm_genlasso_aug', PACKAGE = 'augmentedADMM', A, b, D, M, lambda, reltol, abstol, maxiter, rho)
+}
+
+admm_genlasso_for_graph <- function(A, b, D, M, C, lambda1, lambda2, reltol, abstol, maxiter, rho) {
+    .Call('_augmentedADMM_admm_genlasso_for_graph', PACKAGE = 'augmentedADMM', A, b, D, M, C, lambda1, lambda2, reltol, abstol, maxiter, rho)
 }
 

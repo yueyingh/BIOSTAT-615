@@ -35,7 +35,7 @@ M <- diag(ncol(X))
 
 # Call the function from your package
 result <- genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
-result <- genlasso_admm_with_M(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+result <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
 
 # Benchmark the two functions
 benchmark_res <- microbenchmark(
@@ -43,7 +43,7 @@ benchmark_res <- microbenchmark(
         result_admm <- genlasso_admm(X, Y, D, lambda, rho, alpha, abstol, reltol, maxiter)
     },
     genlasso_admm_with_M = {
-        result_admm_M <- genlasso_admm_with_M(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+        result_admm_M <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
     },
     times = 10
 )
@@ -76,4 +76,5 @@ plot_convergence(result_admm$history, "genlasso_admm")
 plot_convergence(result_admm_M$history, "genlasso_admm_with_M")
 
 dev.off()
+
 
