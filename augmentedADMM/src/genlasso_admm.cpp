@@ -88,7 +88,7 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
 Rcpp::List admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
                                    const arma::mat &D, const arma::mat &C, 
                                    const double lambda1, const double lambda2, 
-                                   const double reltol, const double rho
+                                   const double reltol, const double rho,
                                    const double abstol, const int maxiter) {
   // 1. get parameters
   const int n = A.n_rows;
