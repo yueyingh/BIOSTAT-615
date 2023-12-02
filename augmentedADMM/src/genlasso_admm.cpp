@@ -24,7 +24,7 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
 
   // 3. precompute static variables for x-update and factorization
   arma::mat Atb = A.t() * b;
-  arma::mat U = genlasso_factor(A, rho, D); // returns upper
+  arma::mat U = genlasso_factor(A, rho, D.t()*D);
   arma::mat L = U.t();
 
   // 4. iteration
