@@ -73,7 +73,7 @@ NULL
 #'
 #' @author Xiaozhi Zhu
 #' @export
-genlasso_admm <- function(A, b, D = diag(length(b)), lambda = 1.0, rho = 1.0, alpha = 1.0,
+admm_genlasso <- function(A, b, D = diag(length(b)), lambda = 1.0, rho = 1.0, alpha = 1.0,
                           abstol = 1e-4, reltol = 1e-2, maxiter = 1000) {
     #-----------------------------------------------------------
     ## PREPROCESSING
