@@ -1,9 +1,11 @@
 ###
 # Testing with data generated from ADMM package
+# Standard ADMM vs augADMM
 ###
 
 library(augmentedADMM)
 set.seed(123)
+
 # Generate sample data
 m <- 100
 n <- 200

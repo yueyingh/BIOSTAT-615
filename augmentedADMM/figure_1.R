@@ -9,8 +9,8 @@ lambda_values <- 10^seq(-4, 0, length.out = 20)
 nu_values <- c(5, 10)
 
 data_params <- list(
-    num.groups = 5, num.vars.per.group = 10, n = 1000,
-    num.active.groups = 2, cor = 0.7, err.var = 0.5
+    num.groups = 5, num.vars.per.group = 11, n = 200,
+    num.active.groups = 4, cor = 0.7, err.var = 0.1
 )
 
 runtime_results <- list()

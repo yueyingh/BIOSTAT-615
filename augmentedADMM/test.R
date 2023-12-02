@@ -41,6 +41,8 @@ lambda2 <- 0.1
 result_aug <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
 result_for_graph <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
 
+result_for_graph$x
+
 # Benchmark the two functions
 benchmark_res <- microbenchmark(
     genlasso_admm = {
@@ -80,3 +82,8 @@ plot_convergence(result_admm_aug$history, "genlasso_admm_aug")
 plot_convergence(result_admm_graph$history, "genlasso_admm_graph")
 
 dev.off()
+
+
+data$beta.true - result_for_graph$x
+mse <- mean((data$beta.true - result_for_graph$x)^2)
+mse
