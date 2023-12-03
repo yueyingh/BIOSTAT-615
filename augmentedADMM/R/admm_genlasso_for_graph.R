@@ -1,5 +1,5 @@
 #' @export
-admm_genlasso_for_graph <- function(A, b, D = diag(length(b)), C, lambda1 = 1.0, lambda2 = 1.0, rho = 1.0, alpha = 1.0,
+admm_genlasso_for_graph <- function(A, b, D = diag(length(b)), C, lambda1 = 1.0, lambda2 = 1.0, rho = 1.0,
                                     abstol = 1e-4, reltol = 1e-2, maxiter = 1000) {
   #-----------------------------------------------------------
   ## PREPROCESSING
