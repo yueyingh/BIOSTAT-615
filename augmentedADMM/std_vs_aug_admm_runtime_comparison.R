@@ -65,4 +65,4 @@ ggplot(benchmark_results, aes(x = size, y = time, color = method)) +
     scale_y_continuous(labels = scales::comma) # To format the y axis with commas
 
 # Save the plot to a file
-ggsave("output/std_vs_aug_admm_runtime_comparison.png", device = "png", width = 10, height = 6, dpi = 300)
+ggsave("augmentedADMM/output/std_vs_aug_admm_runtime_comparison.png", device = "png", width = 10, height = 6, dpi = 300)
