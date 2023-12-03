@@ -66,6 +66,4 @@ ggplot(mse_data_long, aes(x = iteration, y = Difference, color = method)) +
     theme_minimal()
 
 # Save the plot to a file
-ggsave("std_vs_aug_admm_precision_comparison.pdf", width = 10, height = 6)
-
-
+ggsave("output/std_vs_aug_admm_precision_comparison.png", device = "png", width = 10, height = 6, dpi = 300)
