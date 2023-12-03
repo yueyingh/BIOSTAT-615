@@ -12,14 +12,14 @@ source("gen_data_v2.R")
 set.seed(123)
 
 # Define different problem sizes
-problem_sizes <- seq(500, 1000, by = 50)
+problem_sizes <- seq(100, 300, by = 50)
 
 # Data frame to store the results
 benchmark_results <- data.frame(size = integer(), method = character(), time = numeric())
 
 for (dim in problem_sizes) {
-  data_params <- list(num.groups = 5, num.vars.per.group=100,
-                      n = dim, num.active.groups=2, cor=0.7, err.var=0.5)
+  data_params <- list(num.groups = dim, num.vars.per.group=11,
+                      n = 200, num.active.groups=4, cor=0.7, err.var=0.1)
   data <- do.call(gen_data, data_params)
 
   X <- data$X
@@ -30,7 +30,7 @@ for (dim in problem_sizes) {
 
 
   # Set regularization lambda value
-  lambda1 <- 5
+  lambda1 <- 0.5
   lambda2 <- 0.1
 
   # Benchmark standard ADMM
