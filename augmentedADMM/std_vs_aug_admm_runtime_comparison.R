@@ -7,7 +7,6 @@ library(microbenchmark)
 library(ggplot2)
 library(Matrix)
 library(augmentedADMM)
-source("gen_data_v2.R")
 
 set.seed(123)
 
@@ -37,14 +36,14 @@ for (n in problem_sizes) {
     # Benchmark standard ADMM
     cat(sprintf("Benchmarking standard ADMM for size: %d...\n", n))
     admm_std_bench <- microbenchmark(
-        genlasso_admm(A, b, D, lambda = regval),
+        admm_genlasso(A, b, D, lambda = regval),
         times = 10
     )
     
     # Benchmark augmented ADMM
     cat(sprintf("Benchmarking augmented ADMM for size: %d...\n", n))
     admm_aug_bench <- microbenchmark(
-        genlasso_admm_aug(A, b, D, M, lambda = regval),
+        aug_admm_genlasso(A, b, D, M, lambda = regval),
         times = 10
     )
     

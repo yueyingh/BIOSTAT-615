@@ -14,7 +14,7 @@ set.seed(123)
 
 # Generate data
 data_params <- list(
-    num.groups = 10, num.vars.per.group = 100, n = 10000,
+    num.groups = 5, num.vars.per.group = 100, n = 1000,
     num.active.groups = 2, cor = 0.7, err.var = 0.5
 )
 
