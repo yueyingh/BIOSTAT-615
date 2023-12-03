@@ -60,7 +60,7 @@ admm_genlasso_for_graph <- function(A, b, D = diag(length(b)), C, lambda1 = 1.0,
   }
 
   #   2. main computation : Xiaozhi's work
-  result <- admm_genlasso_for_graph(A, b, D, C, lambda1, lambda2, reltol, abstol, maxiter, rho)
+  result <- admm_genlasso_for_graph_CPP(A, b, D, C, lambda1, lambda2, reltol, abstol, maxiter, rho)
 
 
   #-----------------------------------------------------------

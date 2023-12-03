@@ -38,18 +38,18 @@ lambda1 <- 0.1
 lambda2 <- 0.1
 
 # Call the function from your package
-result_aug <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
-result_for_graph <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
+result_aug <- aug_admm_genlasso(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+result_for_graph <- admm_genlasso_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
 
 result_for_graph$x
 
 # Benchmark the two functions
 benchmark_res <- microbenchmark(
     genlasso_admm = {
-        result_admm_aug <- genlasso_admm_aug(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
+        result_admm_aug <- aug_admm_genlasso(X, Y, D, M, lambda, rho, alpha, abstol, reltol, maxiter)
     },
     genlasso_admm_with_M = {
-        result_admm_graph <- genlasso_admm_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
+        result_admm_graph <- admm_genlasso_for_graph(X, Y, D, M, C, lambda1, lambda2, rho, alpha, abstol, reltol, maxiter)
     },
     times = 10
 )

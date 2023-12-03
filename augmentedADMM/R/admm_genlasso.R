@@ -127,7 +127,7 @@ admm_genlasso <- function(A, b, D = diag(length(b)), lambda = 1.0, rho = 1.0, al
     }
 
     #   2. main computation : Xiaozhi's work
-    result <- admm_genlasso(A, b, D, lambda, reltol, abstol, maxiter, rho)
+    result <- admm_genlasso_CPP(A, b, D, lambda, reltol, abstol, maxiter, rho)
 
 
     #-----------------------------------------------------------

@@ -5,7 +5,7 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
+Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
                          const arma::mat &D, const double lambda,
                          const double reltol, const double abstol,
                          const int maxiter, const double rho) {
@@ -85,7 +85,7 @@ Rcpp::List admm_genlasso(const arma::mat &A, const arma::colvec &b,
 
 
 // [[Rcpp::export]]
-Rcpp::List admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
+Rcpp::List admm_genlasso_for_graph_CPP(const arma::mat &A, const arma::colvec &b,
                                    const arma::mat &D, const arma::mat &C, 
                                    const double lambda1, const double lambda2, 
                                    const double reltol, const double rho,
@@ -173,7 +173,7 @@ Rcpp::List admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
 
 
 // [[Rcpp::export]]
-Rcpp::List aug_admm_genlasso(const arma::mat &A, const arma::colvec &b,
+Rcpp::List aug_admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
                              const arma::mat &D, const arma::mat &M,
                              const double lambda, const double reltol,
                              const double abstol, const int maxiter,
@@ -256,7 +256,7 @@ Rcpp::List aug_admm_genlasso(const arma::mat &A, const arma::colvec &b,
 }
 
 // [[Rcpp::export]]
-Rcpp::List aug_admm_genlasso_for_graph(const arma::mat &A, const arma::colvec &b,
+Rcpp::List aug_admm_genlasso_for_graph_CPP(const arma::mat &A, const arma::colvec &b,
                                    const arma::mat &D, const arma::mat &M,
                                    const arma::mat &C, const double lambda1,
                                    const double lambda2, const double reltol,

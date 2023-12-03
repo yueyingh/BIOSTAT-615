@@ -11,9 +11,9 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// admm_genlasso
-Rcpp::List admm_genlasso(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
-RcppExport SEXP _augmentedADMM_admm_genlasso(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP lambdaSEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
+// admm_genlasso_CPP
+Rcpp::List admm_genlasso_CPP(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
+RcppExport SEXP _augmentedADMM_admm_genlasso_CPP(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP lambdaSEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -25,13 +25,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type abstol(abstolSEXP);
     Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< const double >::type rho(rhoSEXP);
-    rcpp_result_gen = Rcpp::wrap(admm_genlasso(A, b, D, lambda, reltol, abstol, maxiter, rho));
+    rcpp_result_gen = Rcpp::wrap(admm_genlasso_CPP(A, b, D, lambda, reltol, abstol, maxiter, rho));
     return rcpp_result_gen;
 END_RCPP
 }
-// admm_genlasso_for_graph
-Rcpp::List admm_genlasso_for_graph(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& C, const double lambda1, const double lambda2, const double reltol, const double rho, const double abstol, const int maxiter);
-RcppExport SEXP _augmentedADMM_admm_genlasso_for_graph(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP CSEXP, SEXP lambda1SEXP, SEXP lambda2SEXP, SEXP reltolSEXP, SEXP rhoSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
+// admm_genlasso_for_graph_CPP
+Rcpp::List admm_genlasso_for_graph_CPP(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& C, const double lambda1, const double lambda2, const double reltol, const double rho, const double abstol, const int maxiter);
+RcppExport SEXP _augmentedADMM_admm_genlasso_for_graph_CPP(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP CSEXP, SEXP lambda1SEXP, SEXP lambda2SEXP, SEXP reltolSEXP, SEXP rhoSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -45,13 +45,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type rho(rhoSEXP);
     Rcpp::traits::input_parameter< const double >::type abstol(abstolSEXP);
     Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
-    rcpp_result_gen = Rcpp::wrap(admm_genlasso_for_graph(A, b, D, C, lambda1, lambda2, reltol, rho, abstol, maxiter));
+    rcpp_result_gen = Rcpp::wrap(admm_genlasso_for_graph_CPP(A, b, D, C, lambda1, lambda2, reltol, rho, abstol, maxiter));
     return rcpp_result_gen;
 END_RCPP
 }
-// aug_admm_genlasso
-Rcpp::List aug_admm_genlasso(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& M, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
-RcppExport SEXP _augmentedADMM_aug_admm_genlasso(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP MSEXP, SEXP lambdaSEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
+// aug_admm_genlasso_CPP
+Rcpp::List aug_admm_genlasso_CPP(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& M, const double lambda, const double reltol, const double abstol, const int maxiter, const double rho);
+RcppExport SEXP _augmentedADMM_aug_admm_genlasso_CPP(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP MSEXP, SEXP lambdaSEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -64,13 +64,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type abstol(abstolSEXP);
     Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< const double >::type rho(rhoSEXP);
-    rcpp_result_gen = Rcpp::wrap(aug_admm_genlasso(A, b, D, M, lambda, reltol, abstol, maxiter, rho));
+    rcpp_result_gen = Rcpp::wrap(aug_admm_genlasso_CPP(A, b, D, M, lambda, reltol, abstol, maxiter, rho));
     return rcpp_result_gen;
 END_RCPP
 }
-// aug_admm_genlasso_for_graph
-Rcpp::List aug_admm_genlasso_for_graph(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& M, const arma::mat& C, const double lambda1, const double lambda2, const double reltol, const double abstol, const int maxiter, const double rho);
-RcppExport SEXP _augmentedADMM_aug_admm_genlasso_for_graph(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP MSEXP, SEXP CSEXP, SEXP lambda1SEXP, SEXP lambda2SEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
+// aug_admm_genlasso_for_graph_CPP
+Rcpp::List aug_admm_genlasso_for_graph_CPP(const arma::mat& A, const arma::colvec& b, const arma::mat& D, const arma::mat& M, const arma::mat& C, const double lambda1, const double lambda2, const double reltol, const double abstol, const int maxiter, const double rho);
+RcppExport SEXP _augmentedADMM_aug_admm_genlasso_for_graph_CPP(SEXP ASEXP, SEXP bSEXP, SEXP DSEXP, SEXP MSEXP, SEXP CSEXP, SEXP lambda1SEXP, SEXP lambda2SEXP, SEXP reltolSEXP, SEXP abstolSEXP, SEXP maxiterSEXP, SEXP rhoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -85,16 +85,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type abstol(abstolSEXP);
     Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< const double >::type rho(rhoSEXP);
-    rcpp_result_gen = Rcpp::wrap(aug_admm_genlasso_for_graph(A, b, D, M, C, lambda1, lambda2, reltol, abstol, maxiter, rho));
+    rcpp_result_gen = Rcpp::wrap(aug_admm_genlasso_for_graph_CPP(A, b, D, M, C, lambda1, lambda2, reltol, abstol, maxiter, rho));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_augmentedADMM_admm_genlasso", (DL_FUNC) &_augmentedADMM_admm_genlasso, 8},
-    {"_augmentedADMM_admm_genlasso_for_graph", (DL_FUNC) &_augmentedADMM_admm_genlasso_for_graph, 10},
-    {"_augmentedADMM_aug_admm_genlasso", (DL_FUNC) &_augmentedADMM_aug_admm_genlasso, 9},
-    {"_augmentedADMM_aug_admm_genlasso_for_graph", (DL_FUNC) &_augmentedADMM_aug_admm_genlasso_for_graph, 11},
+    {"_augmentedADMM_admm_genlasso_CPP", (DL_FUNC) &_augmentedADMM_admm_genlasso_CPP, 8},
+    {"_augmentedADMM_admm_genlasso_for_graph_CPP", (DL_FUNC) &_augmentedADMM_admm_genlasso_for_graph_CPP, 10},
+    {"_augmentedADMM_aug_admm_genlasso_CPP", (DL_FUNC) &_augmentedADMM_aug_admm_genlasso_CPP, 9},
+    {"_augmentedADMM_aug_admm_genlasso_for_graph_CPP", (DL_FUNC) &_augmentedADMM_aug_admm_genlasso_for_graph_CPP, 11},
     {NULL, NULL, 0}
 };
 

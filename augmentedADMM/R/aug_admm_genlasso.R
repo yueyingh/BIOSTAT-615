@@ -56,7 +56,7 @@ aug_admm_genlasso <- function(A, b, D = diag(length(b)), M, lambda = 1.0, rho = 
     }
 
     #   2. main computation : Xiaozhi's work
-    result <- aug_admm_genlasso(A, b, D, M, lambda, reltol, abstol, maxiter, rho)
+    result <- aug_admm_genlasso_CPP(A, b, D, M, lambda, reltol, abstol, maxiter, rho)
 
 
     #-----------------------------------------------------------
