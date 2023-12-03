@@ -29,37 +29,43 @@ regval <- 0.1 * max(abs(t(A) %*% b))
 
 # Run standard ADMM
 output_std <- admm_genlasso(A, b, D, lambda = regval)
-output_std
+
 # Run augmented ADMM
 output_aug <- aug_admm_genlasso(A, b, D, M, lambda = regval)
 
+# Function to calculate the difference at each iteration
 calculate_mse_per_iteration <- function(x_iter, true_val) {
-    colSums((x_iter - true_val)^2) / n
+    apply(x_iter, 2, function(x) mean((x - true_val)^2))
 }
 
-# Calculate MSE for standard and augmented ADMM at each iteration
+# Calculate difference for standard and augmented ADMM at each iteration
 mse_std_iter <- calculate_mse_per_iteration(output_std$x_iter, x0)
 mse_aug_iter <- calculate_mse_per_iteration(output_aug$x_iter, x0)
 
+# Print the length of iterations
+cat("Number of iterations for Standard ADMM:", length(mse_std_iter), "\n")
+cat("Number of iterations for Augmented ADMM:", length(mse_aug_iter), "\n")
+
 # Create a data frame for plotting
-iterations <- 1:max(length(mse_std), length(mse_aug))
+iterations <- 1:max(length(mse_std_iter), length(mse_aug_iter))
+
 
 mse_data <- data.frame(
     iteration = iterations,
-    MSE_std = c(mse_std, rep(NA, length(iterations) - length(mse_std))),
-    MSE_aug = c(mse_aug, rep(NA, length(iterations) - length(mse_aug)))
+    MSE_std = c(mse_std_iter, rep(NA, length(iterations) - length(mse_std_iter))),
+    MSE_aug = c(mse_aug_iter, rep(NA, length(iterations) - length(mse_aug_iter)))
 )
-mse_data
 # Reshape data for ggplot
-mse_data_long <- melt(mse_data, id.vars = 'iteration', variable.name = 'method', value.name = 'MSE')
+mse_data_long <- melt(mse_data, id.vars = 'iteration', variable.name = 'method', value.name = 'Difference')
 
 # Plot the results
-ggplot(mse_data_long, aes(x = iteration, y = MSE, color = method)) +
+ggplot(mse_data_long, aes(x = iteration, y = Difference, color = method)) +
     geom_line() +
-    labs(title = "MSE Comparison between Standard ADMM and Augmented ADMM",
-         x = "Iteration", y = "Mean Squared Error (MSE)") +
+    labs(title = "Mean Squared Error between Standard ADMM and Augmented ADMM",
+         x = "Iteration", y = "Mean Squared Error") +
     theme_minimal()
 
 # Save the plot to a file
-ggsave("std_vs_aug_admm_mse_comparison.pdf", width = 10, height = 6)
+ggsave("std_vs_aug_admm_precision_comparison.pdf", width = 10, height = 6)
+
 

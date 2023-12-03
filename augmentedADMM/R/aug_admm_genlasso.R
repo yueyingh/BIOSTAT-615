@@ -64,6 +64,7 @@ aug_admm_genlasso <- function(A, b, D = diag(length(b)), M, lambda = 1.0, rho = 
     kk <- result$k
     output <- list()
     output$x <- result$x
+    output$x_iter <- result$x_iter
     output$history <- data.frame(
         objval = result$objval[1:kk],
         r_norm = result$r_norm[1:kk],
