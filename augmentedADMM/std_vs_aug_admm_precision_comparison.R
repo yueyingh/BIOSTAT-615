@@ -2,6 +2,7 @@
 # Testing precision with data generated from ADMM package
 # Standard ADMM vs augADMM
 ###
+setwd("augmentedADMM")
 
 library(ggplot2)
 library(Matrix)
@@ -66,5 +67,4 @@ ggplot(mse_data_long, aes(x = iteration, y = Difference, color = method)) +
     theme_minimal()
 
 # Save the plot to a file
-ggsave("augmentedADMM/output/std_vs_aug_admm_precision_comparison.png", device = "png", width = 10, height = 6, dpi = 300)
-
+ggsave("output/std_vs_aug_admm_precision_comparison.png", device = "png", width = 10, height = 6, dpi = 300)

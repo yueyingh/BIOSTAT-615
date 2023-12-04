@@ -2,6 +2,7 @@
 # Testing precision with data generated from ADMM package
 # Standard ADMM vs augADMM for graph
 ###
+setwd("augmentedADMM")
 
 library(ggplot2)
 library(Matrix)
@@ -65,7 +66,7 @@ mse_data_long <- melt(mse_data, id.vars = 'iteration', variable.name = 'method',
 # Plot the results
 ggplot(mse_data_long, aes(x = iteration, y = Difference, color = method)) +
   geom_line() +
-  labs(title = "Mean Squared Error between Standard ADMM and Augmented ADMM",
+  labs(title = "Mean Squared Error between Standard ADMM and Augmented ADMM for graph",
        x = "Iteration", y = "Mean Squared Error") +
   theme_minimal()
 

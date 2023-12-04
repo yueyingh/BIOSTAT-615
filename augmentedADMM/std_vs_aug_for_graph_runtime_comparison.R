@@ -2,6 +2,7 @@
 # Testing with data generated from ADMM package
 # Standard ADMM vs augADMM for graph
 ###
+setwd("augmentedADMM")
 
 library(microbenchmark)
 library(ggplot2)
@@ -12,7 +13,7 @@ source("gen_data_v2.R")
 set.seed(123)
 
 # Define different problem sizes
-problem_sizes <- seq(100, 300, by = 50)
+problem_sizes <- seq(100, 200, by = 100)
 
 # Data frame to store the results
 benchmark_results <- data.frame(size = integer(), method = character(), time = numeric())
@@ -65,4 +66,4 @@ ggplot(benchmark_results, aes(x = size, y = time, color = method)) +
   scale_y_continuous(labels = scales::comma) # To format the y axis with commas
 
 # Save the plot to a file
-ggsave("augmentedADMM/output/std_vs_aug_admm_for_graph_runtime_comparison.png", device = "png", width = 10, height = 6, dpi = 300)
+ggsave("output/std_vs_aug_admm_for_graph_runtime_comparison.png", device = "png", width = 10, height = 6, dpi = 300)
