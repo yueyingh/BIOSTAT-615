@@ -57,11 +57,11 @@ for (n in problem_sizes) {
 benchmark_results$time <- benchmark_results$time / 1e9
 
 # Plot the results
-ggplot(benchmark_results, aes(x = size, y = time, color = method)) +
+ggplot(benchmark_results, aes(x = size * 11, y = time, color = method)) +
     geom_line() +
     geom_point() +
     labs(title = "Run Time Comparison between Standard ADMM and Augmented ADMM",
-         x = "Problem Size (n)", y = "Time (seconds)") +
+         x = "Problem Size (p)", y = "Time (seconds)") +
     theme_minimal() +
     scale_y_continuous(labels = scales::comma) # To format the y axis with commas
 

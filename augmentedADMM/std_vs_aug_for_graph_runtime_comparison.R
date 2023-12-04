@@ -61,7 +61,7 @@ ggplot(benchmark_results, aes(x = size * 11, y = time, color = method)) +
   geom_line() +
   geom_point() +
   labs(title = "Run Time Comparison between Standard ADMM and Augmented ADMM for graph",
-       x = "Problem Size (n)", y = "Time (seconds)") +
+       x = "Problem Size (p)", y = "Time (seconds)") +
   theme_minimal() +
   scale_y_continuous(labels = scales::comma) # To format the y axis with commas
 
