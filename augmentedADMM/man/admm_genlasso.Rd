@@ -10,7 +10,6 @@ admm_genlasso(
   D = diag(length(b)),
   lambda = 1,
   rho = 1,
-  alpha = 1,
   abstol = 1e-04,
   reltol = 0.01,
   maxiter = 1000
@@ -27,13 +26,13 @@ admm_genlasso(
 
 \item{rho}{an augmented Lagrangian parameter}
 
-\item{alpha}{an overrelaxation parameter in \link{1,2}}
-
 \item{abstol}{absolute tolerance stopping criterion}
 
 \item{reltol}{relative tolerance stopping criterion}
 
 \item{maxiter}{maximum number of iterations}
+
+\item{alpha}{an overrelaxation parameter in \link{1,2}}
 }
 \value{
 a named list containing \describe{

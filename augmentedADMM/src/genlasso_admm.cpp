@@ -129,6 +129,9 @@ Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
     arma::vec h_eps_pri(maxiter, fill::zeros);
     arma::vec h_eps_dual(maxiter, fill::zeros);
 
+    // Added: Matrix to store x at each iteration
+    arma::mat x_iter;
+
     double sqrtn = std::sqrt(static_cast<float>(n));
     int k;
     for (k = 0; k < maxiter; k++) {
@@ -164,6 +167,13 @@ Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
       }
       h_eps_dual(k) = sqrtn * abstol + reltol * norm(D.t() * u);
 
+       // Update x_iter by adding x as a new column
+      if (k == 0) {
+        x_iter = x;
+      } else {
+        x_iter = arma::join_horiz(x_iter, x);
+      }
+
       // 4-4. termination
       if ((h_r_norm(k) < h_eps_pri(k)) && (h_s_norm(k) < h_eps_dual(k))) {
         break;
@@ -173,6 +183,7 @@ Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
     // 5. report results
     List output;
     output["x"] = x;             // coefficient function
+    output["x_iter"] = x_iter;
     output["objval"] = h_objval; // |x|_1
     output["k"] = k;             // number of iterations
     output["r_norm"] = h_r_norm;
@@ -310,6 +321,9 @@ Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
     arma::vec h_eps_pri(maxiter, fill::zeros);
     arma::vec h_eps_dual(maxiter, fill::zeros);
 
+    // Added: Matrix to store x at each iteration
+    arma::mat x_iter;
+
     double sqrtn = std::sqrt(static_cast<float>(n));
     int k;
     for (k = 0; k < maxiter; k++) {
@@ -347,6 +361,13 @@ Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
       }
       h_eps_dual(k) = sqrtn * abstol + reltol * norm(D.t() * u);
 
+       // Update x_iter by adding x as a new column
+      if (k == 0) {
+        x_iter = x;
+      } else {
+        x_iter = arma::join_horiz(x_iter, x);
+      }
+
       // 4-4. termination
       if ((h_r_norm(k) < h_eps_pri(k)) && (h_s_norm(k) < h_eps_dual(k))) {
         break;
@@ -356,6 +377,7 @@ Rcpp::List admm_genlasso_CPP(const arma::mat &A, const arma::colvec &b,
     // 5. report results
     List output;
     output["x"] = x;             // coefficient function
+    output["x_iter"] = x_iter;
     output["objval"] = h_objval; // |x|_1
     output["k"] = k;             // number of iterations
     output["r_norm"] = h_r_norm;

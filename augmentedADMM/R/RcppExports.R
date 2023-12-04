@@ -5,8 +5,8 @@ admm_genlasso_CPP <- function(A, b, D, lambda, reltol, abstol, maxiter, rho) {
     .Call('_augmentedADMM_admm_genlasso_CPP', PACKAGE = 'augmentedADMM', A, b, D, lambda, reltol, abstol, maxiter, rho)
 }
 
-admm_genlasso_for_graph_CPP <- function(A, b, D, C, lambda1, lambda2, reltol, rho, abstol, maxiter) {
-    .Call('_augmentedADMM_admm_genlasso_for_graph_CPP', PACKAGE = 'augmentedADMM', A, b, D, C, lambda1, lambda2, reltol, rho, abstol, maxiter)
+admm_genlasso_for_graph_CPP <- function(A, b, D, C, lambda1, lambda2, reltol, abstol, maxiter, rho) {
+    .Call('_augmentedADMM_admm_genlasso_for_graph_CPP', PACKAGE = 'augmentedADMM', A, b, D, C, lambda1, lambda2, reltol, abstol, maxiter, rho)
 }
 
 aug_admm_genlasso_CPP <- function(A, b, D, M, lambda, reltol, abstol, maxiter, rho) {

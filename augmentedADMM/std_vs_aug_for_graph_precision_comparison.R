@@ -25,6 +25,8 @@ D <- data$A
 C <- data$C
 M <- data$M
 
+true <- data$beta.true
+
 lambda1 <- 0.5
 lambda2 <- 0.1
 
@@ -40,8 +42,8 @@ calculate_mse_per_iteration <- function(x_iter, true_val) {
 }
 
 # Calculate difference for standard and augmented ADMM at each iteration
-mse_std_iter <- calculate_mse_per_iteration(output_std$x_iter, X)
-mse_aug_iter <- calculate_mse_per_iteration(output_aug$x_iter, X)
+mse_std_iter <- calculate_mse_per_iteration(output_std$x_iter, true)
+mse_aug_iter <- calculate_mse_per_iteration(output_aug$x_iter, true)
 
 # Print the length of iterations
 cat("Number of iterations for Standard ADMM:", length(mse_std_iter), "\n")
@@ -56,6 +58,7 @@ mse_data <- data.frame(
   MSE_std = c(mse_std_iter, rep(NA, length(iterations) - length(mse_std_iter))),
   MSE_aug = c(mse_aug_iter, rep(NA, length(iterations) - length(mse_aug_iter)))
 )
+
 # Reshape data for ggplot
 mse_data_long <- melt(mse_data, id.vars = 'iteration', variable.name = 'method', value.name = 'Difference')
 
@@ -67,7 +70,4 @@ ggplot(mse_data_long, aes(x = iteration, y = Difference, color = method)) +
   theme_minimal()
 
 # Save the plot to a file
-ggsave("augmentedADMM/output/std_vs_aug_admm_for_graph_precision_comparison.png", device = "png", width = 10, height = 6, dpi=300)
-
-
-
+ggsave("output/std_vs_aug_admm_for_graph_precision_comparison.png", device = "png", width = 10, height = 6, dpi=300)
