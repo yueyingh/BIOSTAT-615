@@ -17,7 +17,7 @@ NULL
 #' @param abstol absolute tolerance stopping criterion
 #' @param reltol relative tolerance stopping criterion
 #' @param maxiter maximum number of iterations
-#'
+#' 
 #' @return a named list containing \describe{
 #' \item{x}{a length-\eqn{n} solution vector}
 #' \item{history}{dataframe recording iteration numerics. See the section for more details.}

@@ -1,7 +1,7 @@
 #' Generalized Lasso Solver for Graphs Using ADMM
 #'
 #' Solves the generalized lasso problem for graph-structured data using the Alternating Direction Method of Multipliers (ADMM). This function is designed to handle cases where the data matrix has a graph structure.
-#'
+#' 
 #' @param A Data matrix.
 #' @param b Response vector.
 #' @param D Regularization matrix, defaults to the identity matrix with size equal to the length of `b`.

@@ -38,4 +38,4 @@ To run these scripts, clone the repository and ensure you have R and the necessa
 
 ## References
 
-- Zhu, Y. (2017). [Title of the Paper]. Journal/Conference Name.
+- Zhu, Y. (2017). [An Augmented ADMM Algorithm With Application to the Generalized Lasso Problem]. Journal of Computational and Graphical Statistics.

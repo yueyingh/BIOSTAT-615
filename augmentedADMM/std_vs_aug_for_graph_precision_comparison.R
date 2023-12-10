@@ -77,7 +77,7 @@ ggplot(mse_data_long, aes(x = iteration, y = Difference, color = method)) +
   labs(title = "Mean Squared Error between Standard ADMM and Augmented ADMM for graph",
        x = "Iteration", y = "Mean Squared Error") +
   theme_minimal()
-
+ 
 # Save the plot to a file
 ggsave("output/std_vs_aug_admm_for_graph_precision_comparison.png", device = "png", width = 10, height = 6, dpi=300)
 

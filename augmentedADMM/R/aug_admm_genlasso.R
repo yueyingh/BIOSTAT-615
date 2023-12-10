@@ -2,7 +2,7 @@
 #'
 #' Solves the generalized lasso problem using the augmented Alternating Direction Method of Multipliers (ADMM). 
 #' This function extends the standard ADMM approach by incorporating an additional matrix 'M', which can lead to more efficient computations in certain scenarios.
-#'
+#' 
 #' @param A Data matrix.
 #' @param b Response vector.
 #' @param D Regularization matrix, defaults to the identity matrix of the length of `b`.

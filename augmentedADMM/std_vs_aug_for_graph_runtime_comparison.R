@@ -3,7 +3,7 @@
 # specifically for graph-structured problems. The script generates a plot showing 
 # runtime differences between the two methods across varying problem sizes.
 ###
-
+ 
 setwd("augmentedADMM")
 
 library(microbenchmark)

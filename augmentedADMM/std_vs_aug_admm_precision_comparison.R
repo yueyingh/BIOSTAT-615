@@ -3,7 +3,7 @@
 # on a generated sparse matrix problem. The script outputs a plot 
 # comparing the Mean Squared Error (MSE) at each iteration for both methods.
 ###
-
+ 
 setwd("augmentedADMM")
 
 library(ggplot2)
