@@ -34,11 +34,7 @@ These scripts evaluate the precision of the two ADMM methods.
 
 ## Getting Started
 
-To run these scripts, clone the repository and ensure you have R and the necessary libraries installed. Each script can be executed independently to generate the corresponding plots. The scripts are well-commented and include examples and parameters for typical usage scenarios.
-
-## Contributing
-
-Contributions to improve the algorithms or extend the comparisons are welcome. Please feel free to fork the repository, make your changes, and submit a pull request.
+To run these scripts, clone the repository and ensure you have R and the necessary libraries installed. Each script can be executed independently to generate the corresponding plots.
 
 ## References
 
