@@ -1,22 +1,45 @@
 # Standard ADMM vs. Augmented ADMM Comparison
 
+This R package provides a comprehensive comparison between Standard Alternating Direction Method of Multipliers (ADMM) and Augmented ADMM. It includes a series of scripts for testing and evaluating the performance of these algorithms in various scenarios, including standard settings and graph-structured data.
+
+## Overview
+
+The package contains scripts that compare Standard ADMM and Augmented ADMM in terms of runtime and precision. Each script generates a data set, applies both ADMM algorithms, and plots the results for easy visualization and analysis. The comparison covers both standard data matrices and graph-structured data, providing a broad view of the performance characteristics of these algorithms.
+
 ## Test Files
-### `std_vs_aug_admm_runtime_comparison.R`
-Testing with data generated from ADMM package<br>
-Standard ADMM vs augADMM<br>
-Plots std_vs_aug_admm_runtime_comparison.pdf<br>
 
-### `std_vs_aug_admm_precision_comparison.R`
-Testing with data generated from ADMM package<br>
-Standard ADMM vs augADMM<br>
-Plots std_vs_aug_admm_precision_comparison.pdf<br>
+### Runtime Comparison Scripts
 
-### `std_vs_aug_for_graph_runtime_comparison.R`
-Testing with data generated from graph generating procedure from Zhu, Y. (2017)<br>
-Standard ADMM vs augADMM (for graph)<br>
-Plots std_vs_aug_admm_for_graph_runtime_comparison.pdf<br>
+These scripts compare the runtime efficiency of Standard ADMM and Augmented ADMM. 
 
-### `std_vs_aug_for_graph_precision_comparison.R`
-Testing with data generated from graph generating procedure from Zhu, Y. (2017)<br>
-Standard ADMM vs augADMM (for graph)<br>
-Plots std_vs_aug_admm_for_graph_precision_comparison.pdf<br>
+- **`std_vs_aug_admm_runtime_comparison.R`**: 
+  - **Purpose**: Compares the runtime performance on standard data sets.
+  - **Output**: `std_vs_aug_admm_runtime_comparison.pdf`, a plot visualizing the runtime comparison.
+
+- **`std_vs_aug_for_graph_runtime_comparison.R`**: 
+  - **Purpose**: Focuses on runtime comparison using graph-structured data, based on the graph generating procedure from Zhu, Y. (2017).
+  - **Output**: `std_vs_aug_admm_for_graph_runtime_comparison.pdf`, a plot illustrating runtime comparison for graph data.
+
+### Precision Comparison Scripts
+
+These scripts evaluate the precision of the two ADMM methods.
+
+- **`std_vs_aug_admm_precision_comparison.R`**: 
+  - **Purpose**: Assesses the precision of Standard and Augmented ADMM on standard data sets.
+  - **Output**: `std_vs_aug_admm_precision_comparison.pdf`, a plot showing the precision comparison.
+
+- **`std_vs_aug_for_graph_precision_comparison.R`**: 
+  - **Purpose**: Analyzes the precision of the algorithms specifically for graph-structured data, using data generation techniques from Zhu, Y. (2017).
+  - **Output**: `std_vs_aug_admm_for_graph_precision_comparison.pdf`, a plot detailing the precision comparison for graph data.
+
+## Getting Started
+
+To run these scripts, clone the repository and ensure you have R and the necessary libraries installed. Each script can be executed independently to generate the corresponding plots. The scripts are well-commented and include examples and parameters for typical usage scenarios.
+
+## Contributing
+
+Contributions to improve the algorithms or extend the comparisons are welcome. Please feel free to fork the repository, make your changes, and submit a pull request.
+
+## References
+
+- Zhu, Y. (2017). [Title of the Paper]. Journal/Conference Name.

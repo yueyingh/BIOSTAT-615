@@ -1,3 +1,35 @@
+#' Augmented ADMM Solver for Generalized Lasso Problems
+#'
+#' Solves the generalized lasso problem using the augmented Alternating Direction Method of Multipliers (ADMM). 
+#' This function extends the standard ADMM approach by incorporating an additional matrix 'M', which can lead to more efficient computations in certain scenarios.
+#'
+#' @param A Data matrix.
+#' @param b Response vector.
+#' @param D Regularization matrix, defaults to the identity matrix of the length of `b`.
+#' @param M Augmentation matrix used in the augmented ADMM.
+#' @param lambda Regularization parameter.
+#' @param rho Augmentation parameter for ADMM.
+#' @param abstol Absolute tolerance level for convergence.
+#' @param reltol Relative tolerance level for convergence.
+#' @param maxiter Maximum number of iterations for the algorithm.
+#'
+#' @return A list containing the following components:
+#'   - `x`: The solution vector.
+#'   - `x_iter`: Solution vector at each iteration.
+#'   - `history`: A data frame containing the objective value, primal and dual norms, 
+#'     and epsilon values for primal and dual convergence checks at each iteration.
+#'
+#' @examples
+#' # Generate synthetic data
+#' n <- 200; m <- 100; p <- 0.1
+#' A <- matrix(rnorm(m * n), nrow = m)
+#' b <- matrix(rnorm(m))
+#' D <- diag(n)
+#' M <- diag(n) # Example augmentation matrix
+#'
+#' # Solve using aug_admm_genlasso
+#' result <- aug_admm_genlasso(A, b, D, M)
+#'
 #' @export
 aug_admm_genlasso <- function(A, b, D = diag(length(b)), M, lambda = 1.0, rho = 1.0,
                                  abstol = 1e-4, reltol = 1e-2, maxiter = 1000) {

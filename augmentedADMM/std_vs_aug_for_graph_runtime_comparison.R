@@ -1,7 +1,9 @@
 ###
-# Testing with data generated from ADMM package
-# Standard ADMM vs augADMM for graph
+# Script Purpose: Evaluate and compare the runtime of standard ADMM and augmented ADMM 
+# specifically for graph-structured problems. The script generates a plot showing 
+# runtime differences between the two methods across varying problem sizes.
 ###
+
 setwd("augmentedADMM")
 
 library(microbenchmark)
@@ -12,7 +14,7 @@ source("gen_data_v2.R")
 
 set.seed(123)
 
-# Define different problem sizes
+# Define a range of problem sizes for benchmarking
 problem_sizes <- seq(100, 200, by = 25)
 
 # Data frame to store the results
@@ -23,11 +25,12 @@ for (dim in problem_sizes) {
                       n = 200, num.active.groups=4, cor=0.7, err.var=0.1)
   data <- do.call(gen_data, data_params)
 
+  # Extract matrices and vectors from generated data
   X <- data$X
   Y <- data$Y
-  D <- data$A
-  C <- data$C
-  M <- data$M
+  D <- data$A  # Incidence matrix for the graph
+  C <- data$C  # Constraint matrix
+  M <- data$M  # Matrix for augmented ADMM
 
 
   # Set regularization lambda value

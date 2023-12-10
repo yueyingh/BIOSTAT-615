@@ -1,3 +1,37 @@
+#' Augmented ADMM Solver for Generalized Lasso on Graphs
+#'
+#' This function implements the augmented Alternating Direction Method of Multipliers (ADMM) 
+#' specifically tailored for solving the generalized lasso problem on graph-structured data. 
+#' It is an extension of the standard ADMM by incorporating an additional matrix 'M'.
+#'
+#' @param A Data matrix.
+#' @param b Response vector.
+#' @param D Regularization matrix, defaults to the identity matrix of the length of `b`.
+#' @param M Augmentation matrix used in the augmented ADMM.
+#' @param C Constraint matrix for the graph structure.
+#' @param lambda1 Regularization parameter for the lasso penalty.
+#' @param lambda2 Regularization parameter for the graph constraint.
+#' @param rho Augmentation parameter for ADMM.
+#' @param abstol Absolute tolerance level for convergence.
+#' @param reltol Relative tolerance level for convergence.
+#' @param maxiter Maximum number of iterations for the algorithm.
+#'
+#' @return A list containing the solution vector, the solution vector at each iteration, 
+#' and a history data frame that includes objective value, primal and dual norms, 
+#' and epsilon values for primal and dual convergence checks at each iteration.
+#'
+#' @examples
+#' # Generate synthetic data for a graph-structured problem
+#' n <- 200; m <- 100; p <- 0.1
+#' A <- matrix(rnorm(m * n), nrow = m)
+#' b <- matrix(rnorm(m))
+#' D <- diag(n)
+#' M <- diag(n) # Example augmentation matrix
+#' C <- matrix(rnorm(m * n), nrow = m)
+#'
+#' # Solve using aug_admm_genlasso_for_graph
+#' result <- aug_admm_genlasso_for_graph(A, b, D, M, C)
+#'
 #' @export
 aug_admm_genlasso_for_graph <- function(A, b, D = diag(length(b)), M, C, lambda1 = 1.0, lambda2 = 1.0, rho = 1.0, 
                                     abstol = 1e-4, reltol = 1e-2, maxiter = 1000) {

@@ -1,32 +1,38 @@
 ###
-# Testing precision with data generated from ADMM package
-# Standard ADMM vs augADMM for graph
+# Script Purpose: Compare the precision of standard ADMM and augmented ADMM
+# specifically for graph-structured data. The script produces a plot of the 
+# Mean Squared Error (MSE) at each iteration for both methods.
 ###
+
 setwd("augmentedADMM")
 
 library(ggplot2)
 library(Matrix)
 library(augmentedADMM)
 library(reshape2)
-source("gen_data_v2.R")
+source("gen_data_v2.R") 
 
 set.seed(123)
 
-# Define a problem size for demonstration
+# Define parameters for generating the dataset
 data_params <- list(
-  num.groups = 100, num.vars.per.group = 11, n = 200,
-  num.active.groups = 4, cor = 0.7, err.var = 0.1
+  num.groups = 100,              # Number of groups in the graph
+  num.vars.per.group = 11,       # Number of variables per group
+  n = 200,                       # Number of observations
+  num.active.groups = 4,         # Number of active groups
+  cor = 0.7,                     # Correlation coefficient
+  err.var = 0.1                  # Error variance
 )
 
 data <- do.call(gen_data, data_params)
 
+# Extracting matrices and vectors from the generated data
 X <- data$X
 Y <- data$Y
-D <- data$A
-C <- data$C
-M <- data$M
-
-true <- data$beta.true
+D <- data$A  # Incidence matrix for the graph
+C <- data$C  # Constraint matrix
+M <- data$M  # Matrix for augmented ADMM
+true <- data$beta.true  # True regression coefficients
 
 lambda1 <- 0.5
 lambda2 <- 0.1
@@ -59,6 +65,8 @@ mse_data <- data.frame(
   MSE_std = c(mse_std_iter, rep(NA, length(iterations) - length(mse_std_iter))),
   MSE_aug = c(mse_aug_iter, rep(NA, length(iterations) - length(mse_aug_iter)))
 )
+
+mse_data
 
 # Reshape data for ggplot
 mse_data_long <- melt(mse_data, id.vars = 'iteration', variable.name = 'method', value.name = 'Difference')

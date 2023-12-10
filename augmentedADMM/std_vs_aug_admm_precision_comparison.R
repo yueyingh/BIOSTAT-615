@@ -1,7 +1,9 @@
 ###
-# Testing precision with data generated from ADMM package
-# Standard ADMM vs augADMM
+# Script Purpose: Compare the precision of standard ADMM and augmented ADMM
+# on a generated sparse matrix problem. The script outputs a plot 
+# comparing the Mean Squared Error (MSE) at each iteration for both methods.
 ###
+
 setwd("augmentedADMM")
 
 library(ggplot2)
@@ -11,17 +13,24 @@ library(reshape2)
 
 set.seed(123)
 
-# Define a problem size for demonstration
-n <- 200
-m <- 100
-p <- 0.1
+# Define dimensions of the problem for demonstration purposes
+n <- 200 # number of rows
+m <- 100 # number of columns
+p <- 0.1 # sparsity level
 
+# Generate a sparse matrix x0 as the true value
 x0 <- matrix(Matrix::rsparsematrix(n, 1, p))
+
+# Generate a random matrix A and normalize its columns
 A <- matrix(rnorm(m * n), nrow = m)
 for (i in 1:ncol(A)) {
     A[, i] <- A[, i] / sqrt(sum(A[, i]^2))
 }
+
+# Generate response vector b with some noise
 b <- A %*% x0 + sqrt(0.001) * matrix(rnorm(m))
+
+# Define diagonal matrix D and matrix M for augmented ADMM
 D <- diag(n)
 M <- norm(D, "2") * diag(n)
 
@@ -49,7 +58,7 @@ cat("Number of iterations for Augmented ADMM:", length(mse_aug_iter), "\n")
 
 # Create a data frame for plotting
 iterations <- 1:max(length(mse_std_iter), length(mse_aug_iter))
-
+mse_data
 
 mse_data <- data.frame(
     iteration = iterations,
