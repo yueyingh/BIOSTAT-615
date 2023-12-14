@@ -17,7 +17,7 @@ This section verifies that our package can be installed seamlessly in a fresh en
 
 ```{r installation, echo=TRUE, message=FALSE, warning=FALSE}
 # Install the package directly from GitHub
-# devtools::install_github("yueyingh/BIOSTAT-615")
+# devtools::install_github("yueyingh/BIOSTAT-615/augmentedADMM")
 
 # Load the package
 library(augmentedADMM)
