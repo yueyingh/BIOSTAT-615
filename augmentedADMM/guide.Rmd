@@ -16,7 +16,7 @@ This document is designed to accompany our final report. It serves as a practica
 This section verifies that our package can be installed seamlessly in a fresh environment.
 
 ```{r installation, echo=TRUE, message=FALSE, warning=FALSE}
-# Install the package directly from GitHub (if applicable)
+# Install the package directly from GitHub
 # devtools::install_github("yueyingh/BIOSTAT-615")
 
 # Load the package
