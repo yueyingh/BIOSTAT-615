@@ -1,0 +1,25 @@
+---
+title: "Package Verification and Examples"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# Introduction
+
+This document is designed to accompany our final report. It serves as a practical demonstration of how our R package, `augmentedADMM`, can be installed and used in an independent computing environment. Additionally, it provides examples that reproduce key results from our study and conducts any further evaluations that may be beneficial for understanding our work.
+
+# Verification of Package Installation
+
+This section verifies that our package can be installed seamlessly in a fresh environment.
+
+```{r installation, echo=TRUE, message=FALSE, warning=FALSE}
+# Install the package directly from GitHub
+# devtools::install_github("yueyingh/BIOSTAT-615")
+
+# Load the package
+library(augmentedADMM)
+
+# could continue testing the package functions in the four test files
